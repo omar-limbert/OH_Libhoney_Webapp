@@ -1,0 +1,40 @@
+plugins {
+  id 'com.jonaslasauskas.capsule' version '0.3.0'
+}
+
+apply plugin: 'java'
+
+group = 'io.honeycomb.libhoney'
+version = '1.0.2'
+
+description = """libhoney-java (Example Web-App)"""
+
+capsule {
+  capsuleManifest {
+    applicationId = 'io.honeycomb.libhoney.example.webapp.Application'
+    applicationClass = 'io.honeycomb.libhoney.example.webapp.Application'
+  }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+repositories {
+     mavenCentral()
+     maven { url "https://oss.jfrog.org/artifactory/libs-snapshot" }     
+}
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.4.2.RELEASE'
+    compile group: 'io.honeycomb.libhoney', name: 'libhoney-java', version:'1.0.2'
+    compile group: 'com.github.tomakehurst', name: 'wiremock', version:'2.17.0'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'1.4.2.RELEASE'
+    compile group: 'nl.basjes.parse.useragent', name: 'yauaa', version:'4.3'
+    runtime group: 'com.h2database', name: 'h2', version:'1.4.193'
+    testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'1.4.2.RELEASE') {
+exclude(module: 'commons-logging')
+    }
+}
