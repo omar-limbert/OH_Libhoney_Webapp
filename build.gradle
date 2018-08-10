@@ -1,20 +1,15 @@
 plugins {
   id 'com.jonaslasauskas.capsule' version '0.3.0'
+  id "org.sonarqube" version "2.6.2"
 }
 
 apply plugin: 'java'
+apply plugin: 'jacoco'
 
 group = 'io.honeycomb.libhoney'
 version = '1.0.2'
 
 description = """libhoney-java (Example Web-App)"""
-
-capsule {
-  capsuleManifest {
-    applicationId = 'io.honeycomb.libhoney.example.webapp.Application'
-    applicationClass = 'io.honeycomb.libhoney.example.webapp.Application'
-  }
-}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -25,6 +20,30 @@ tasks.withType(JavaCompile) {
 repositories {
      mavenCentral()
      maven { url "https://oss.jfrog.org/artifactory/libs-snapshot" }     
+}
+
+uploadArchives {
+    repositories {
+        flatDir {
+            dirs 'repos'
+        }
+    }
+}
+
+jacocoTestReport {
+    group = "Reporting"
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.destination file("${buildDir}/reports/coverage")
+    }
+}
+
+capsule {
+    capsuleManifest {
+        applicationId = 'io.honeycomb.libhoney.example.webapp.Application'
+        applicationClass = 'io.honeycomb.libhoney.example.webapp.Application'
+    }
 }
 
 dependencies {
