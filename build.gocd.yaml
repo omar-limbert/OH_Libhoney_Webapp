@@ -41,10 +41,10 @@ pipelines:
                       - check
               artifacts:
                 - build:
-                    source: build/reports/coverage/*
+                    source: build/reports/coverage/**/*
                     destination: html_coverage
                 - build:
-                    source: build/reports/tests/test/*
+                    source: build/reports/tests/test/**/*
                     destination: html_report
                 - build:
                     source: build/reports/findbugs/main.html
