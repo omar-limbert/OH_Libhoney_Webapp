@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Code Quality') {
             steps {
-                sh '/gradlew sonarqube -Dsonar.organization=omar-limbert-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=f005f31e1cc80c26275d54f377b35595a4457f86'
+                sh './gradlew sonarqube -Dsonar.organization=omar-limbert-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=f005f31e1cc80c26275d54f377b35595a4457f86'
             }
         }
         stage('Publish') {
