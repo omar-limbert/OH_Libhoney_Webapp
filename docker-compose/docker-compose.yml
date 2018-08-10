@@ -1,0 +1,33 @@
+version: '3'
+services:
+  jenkins_server:
+   image: "registry.fundacion-jala.local/devops/jenkinsci/blueocean:1.5.0"
+   restart: always
+   ports:
+    - "8080:8080"
+    - "5000:5000"
+   volumes:
+    - /Users/omar/Jala/jala containers/docker-compose-jenkins/jenkins:/var/jenkins_home
+  gocd_server:
+    image: "registry.fundacion-jala.local/devops/gocd/gocd-server:v18.5.0"
+    restart: always
+    ports:
+      - "8153:8153"
+      - "8154:8154"
+    volumes:
+      - /Users/omar/Jala/jala containers/docker-compose-jenkins/godata_server:/godata
+      - /Users/omar/Jala/jala containers/docker-compose-jenkins/go_server:/home/go
+  gocd_agent:
+    image: "registry.fundacion-jala.local/devops/gocd/gocd-agent-alpine-3.7:v18.5.0"
+    restart: always
+    environment:
+      - GO_SERVER_URL=https://gocd_server:8154/go
+    volumes:
+      - /Users/omar/Jala/jala containers/docker-compose-jenkins/godata_agent:/godata
+      - /Users/omar/Jala/jala containers/docker-compose-jenkins/go_agent:/home/go
+  sonarqube:
+    image: "registry.fundacion-jala.local/devops/sonarqube:6.7.4-alpine"
+    restart: always
+    ports:
+      - "9000:9000"
+      - "9092:9092"
