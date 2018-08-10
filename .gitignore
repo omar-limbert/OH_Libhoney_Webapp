@@ -8,5 +8,5 @@
 *.xml
 *.MF
 **/resources/*/
-**/build/*/
-/repos/*/
+**/build/*
+**/repos/*
