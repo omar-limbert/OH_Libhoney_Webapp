@@ -6,6 +6,7 @@ plugins {
 apply plugin: 'java'
 apply plugin: 'jacoco'
 apply plugin: 'findbugs'
+apply plugin: 'pmd'
 
 group = 'io.honeycomb.libhoney'
 version = '1.0.2'
@@ -65,4 +66,20 @@ tasks.withType(FindBugs) {
         xml.enabled false
         html.enabled true
     }
+}
+
+pmd {
+    ignoreFailures = true
+    ruleSets = [
+            'java-basic',
+            'java-braces',
+            'java-codesize',
+            'java-comments',
+            'java-design',
+            'java-empty',
+            'java-imports',
+            'java-strings',
+            'java-unnecessary',
+            'java-unusedcode'
+    ]
 }
