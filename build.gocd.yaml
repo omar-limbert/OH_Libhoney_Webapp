@@ -15,8 +15,8 @@ pipelines:
                 - exec:
                     command: ./gradlew
                     arguments:
-                      - "clean"
-                      - "assemble"
+                      - clean
+                      - assemble
       - Test:
           jobs:
             unittests:
@@ -52,11 +52,19 @@ pipelines:
                 - build:
                     source: build/reports/findbugs/test.html
                     destination: findbugs_html
+                - build:
+                    source: build/reports/pmd/main.html
+                    destination: pmd_html
+                - build:
+                    source: build/reports/pmd/test.html
+                    destination: pmd_html
               tabs:
                 Cod_Coverage: html_coverage/index.html
                 Test_Summary: html_report/index.html
                 Findbugs_main: findbugs_html/main.html
                 Findbugs_test: findbugs_html/test.html
+                PMD_main: pmd_html/main.html
+                PMD_test: pmd_html/test.html
       - CodeQuality:
           jobs:
             sonarqube:
@@ -65,9 +73,9 @@ pipelines:
                     command: ./gradlew
                     arguments:
                       - sonarqube
-                      - -Dsonar.organization=devops_at06
+                      - -Dsonar.organization=omar-limbert-github
                       - -Dsonar.host.url=https://sonarcloud.io
-                      - -Dsonar.login=f5645e581c153ea97ba859e24669e95f857d6be3
+                      - -Dsonar.login=f005f31e1cc80c26275d54f377b35595a4457f86
       - Publish:
           jobs:
             pucblishArtifact:
@@ -75,7 +83,7 @@ pipelines:
                 - exec:
                     command: ./gradlew
                     arguments:
-                      - "uploadArchives"
+                      - uploadArchives
               artifacts:
                 - build:
                     source: repos/*.jar
