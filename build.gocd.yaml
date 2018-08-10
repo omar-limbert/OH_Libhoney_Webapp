@@ -1,0 +1,73 @@
+format_version: 3
+pipelines:
+  libhoney-yaml-config:
+    lock_behavior: lockOnFailure
+    group: WebJavaAPP
+    materials:
+      repo:
+       git: https://github.com/devops-at06/OH_Libhoney_Webapp.git
+       branch: master
+    stages:
+      - Compile:
+          jobs:
+            assemble:
+              tasks:
+                - exec:
+                    command: ./gradlew
+                    arguments:
+                      - "clean"
+                      - "assemble"
+      - Test:
+          jobs:
+            unittests:
+              tasks:
+                - exec:
+                    command: ./gradlew
+                    arguments:
+                      - clean
+                      - test
+              artifacts:
+                - test:
+                    source: build/test-results/test/*xml
+                    destination: xml
+            codeCoverage:
+              tasks:
+                - exec:
+                    command: ./gradlew
+                    arguments:
+                      - clean
+                      - test
+                      - jacocoTestReport
+              artifacts:
+                - build:
+                    source: build/reports/coverage/*
+                    destination: html_coverage
+                - build:
+                    source: build/reports/tests/test/*
+                    destination: html_report
+              tabs:
+                Cod_Coverage: html_coverage/index.html
+                Test_Summary: html_report/index.html
+      - CodeQuality:
+          jobs:
+            sonarqube:
+              tasks:
+                - exec:
+                    command: ./gradlew
+                    arguments:
+                      - sonarqube
+                      - -Dsonar.organization=omar-limbert-github
+                      - -Dsonar.host.url=https://sonarcloud.io
+                      - -Dsonar.login=f005f31e1cc80c26275d54f377b35595a4457f86'
+      - Publish:
+          jobs:
+            pucblishArtifact:
+              tasks:
+                - exec:
+                    command: ./gradlew
+                    arguments:
+                      - "uploadArchives"
+              artifacts:
+                - build:
+                    source: repos/*.jar
+                    destination: war
