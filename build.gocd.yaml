@@ -38,6 +38,7 @@ pipelines:
                       - clean
                       - test
                       - jacocoTestReport
+                      - check
               artifacts:
                 - build:
                     source: build/reports/coverage/*
@@ -45,9 +46,17 @@ pipelines:
                 - build:
                     source: build/reports/tests/test/*
                     destination: html_report
+                - build:
+                    source: build/reports/findbugs/main.html
+                    destination: findbugs_html
+                - build:
+                    source: build/reports/findbugs/test.html
+                    destination: findbugs_html
               tabs:
                 Cod_Coverage: html_coverage/index.html
                 Test_Summary: html_report/index.html
+                Findbugs_main: findbugs_html/main.html
+                Findbugs_test: findbugs_html/test.html
       - CodeQuality:
           jobs:
             sonarqube:
@@ -56,9 +65,9 @@ pipelines:
                     command: ./gradlew
                     arguments:
                       - sonarqube
-                      - -Dsonar.organization=omar-limbert-github
+                      - -Dsonar.organization=devops_at06
                       - -Dsonar.host.url=https://sonarcloud.io
-                      - -Dsonar.login=f005f31e1cc80c26275d54f377b35595a4457f86'
+                      - -Dsonar.login=f5645e581c153ea97ba859e24669e95f857d6be3
       - Publish:
           jobs:
             pucblishArtifact:
