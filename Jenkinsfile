@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Code Quality') {
             steps {
-                sh './gradlew sonarqube -Dsonar.organization=omar-limbert-github -Dsonar.host.url=https://sonarcloud.io  -Dsonar.login=f005f31e1cc80c26275d54f377b35595a4457f86'
+                sh '/gradlew sonarqube -Dsonar.organization=omar-limbert-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=f005f31e1cc80c26275d54f377b35595a4457f86'
             }
         }
         stage('Publish') {
@@ -59,27 +59,9 @@ pipeline {
                              reportFiles: 'test.html',
                              reportName: "Findbugs Test Analysis"
                            ])
-                publishHTML (target: [
-                             allowMissing: false,
-                             alwaysLinkToLastBuild: false,
-                             keepAll: true,
-                             reportDir: 'build/reports/pmd',
-                             reportFiles: 'main.html',
-                             reportName: "PMD Main Analysis"
-                ])
-                publishHTML (target: [
-                             allowMissing: false,
-                             alwaysLinkToLastBuild: false,
-                             keepAll: true,
-                             reportDir: 'build/reports/pmd',
-                             reportFiles: 'test.html',
-                             reportName: "PMD Test Analysis"
-                ])
                 archiveArtifacts artifacts: '**/repos/*.jar', fingerprint: true, onlyIfSuccessful: true
 
 
         }
-
     }
-
 }

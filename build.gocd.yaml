@@ -41,7 +41,7 @@ pipelines:
                       - check
               artifacts:
                 - build:
-                    source: build/reports/coverage/*
+                    source: build/reports/coverage/
                     destination: html_coverage
                 - build:
                     source: build/reports/tests/test/*
