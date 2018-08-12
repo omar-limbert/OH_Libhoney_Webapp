@@ -76,6 +76,19 @@ pipelines:
                       - -Dsonar.organization=omar-limbert-github
                       - -Dsonar.host.url=https://sonarcloud.io
                       - -Dsonar.login=f005f31e1cc80c26275d54f377b35595a4457f86
+      - Package:
+          jobs:
+            fatJar:
+              tasks:
+                - exec:
+                    command: ./gradlew
+                    arguments:
+                      - build
+                      - capsule
+              artifacts:
+                - build:
+                    source: build/libs/*.jar
+                    destination: fatJar
       - Publish:
           jobs:
             pucblishArtifact:
