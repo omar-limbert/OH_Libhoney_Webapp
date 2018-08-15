@@ -109,14 +109,13 @@ pipelines:
                      job: fatJar
                      source: fatJar/
                 - exec:
-                    command: ./gradle/webquickstart/gradlew
+                    command: ./gradlew
                     arguments:
                       - -b
                       - deploy.gradle
                       - deploy
-                      - -Ddev_server=10.28.135.233 
-                      - -Duser_server=ubuntu 
-                      - -Dkey_path=/home/go/omy.pem 
-                      - -Dtomcat_webapps=/opt/tomcat/webapps 
-                      - -Dwar_path=war 
-                      - -Dwar_name=webquickstart  
+                      - -Pdev_server=10.28.135.233 
+                      - -Puser_server=ubuntu 
+                      - -Pkey_path=/home/go/omy.pem 
+                      - -Pjar_path=fatJar 
+                      - -Pjar_name=libhoney-java-example-webapp-1.0.2-capsule.jar  
