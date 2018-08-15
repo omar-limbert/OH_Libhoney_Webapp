@@ -118,4 +118,4 @@ pipelines:
                       - -Puser_server=ubuntu 
                       - -Pkey_path=/home/go/omy.pem 
                       - -Pjar_path=fatJar 
-                      - -Pjar_name=libhoney-java-example-webapp-1.0.2-capsule.jar  
+                      - -Pjar_name=libhoney-java-example-webapp-1.0.2-capsule
