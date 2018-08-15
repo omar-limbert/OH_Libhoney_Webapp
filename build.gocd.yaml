@@ -24,7 +24,6 @@ pipelines:
                 - exec:
                     command: ./gradlew
                     arguments:
-                      - clean
                       - test
               artifacts:
                 - test:
@@ -35,7 +34,6 @@ pipelines:
                 - exec:
                     command: ./gradlew
                     arguments:
-                      - clean
                       - test
                       - jacocoTestReport
                       - check
@@ -101,3 +99,23 @@ pipelines:
                 - build:
                     source: repos/*.jar
                     destination: war
+
+      - Deploy:
+          jobs:
+            deploying:
+              tasks:
+                - fetch:
+                     stage: Package
+                     job: fatJar
+                     source: fatJar/
+                - exec:
+                    command: ./gradlew
+                    arguments:
+                      - -b
+                      - deploy.gradle
+                      - deploy
+                      - -Pdev_server=10.28.135.233 
+                      - -Puser_server=ubuntu 
+                      - -Pkey_path=/home/go/omy.pem 
+                      - -Pjar_path=fatJar 
+                      - -Pjar_name=libhoney-java-example-webapp-1.0.2-capsule.jar  
