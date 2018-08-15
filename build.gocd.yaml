@@ -71,7 +71,7 @@ pipelines:
                     command: ./gradlew
                     arguments:
                       - sonarqube
-                      - -Dsonar.host.url=http://sonarqube:9000
+                      - -Dsonar.host.url=http://10.28.135.234:9000
       - Package:
           jobs:
             fatJar:
