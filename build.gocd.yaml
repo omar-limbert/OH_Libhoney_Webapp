@@ -24,7 +24,6 @@ pipelines:
                 - exec:
                     command: ./gradlew
                     arguments:
-                      - clean
                       - test
               artifacts:
                 - test:
@@ -35,7 +34,6 @@ pipelines:
                 - exec:
                     command: ./gradlew
                     arguments:
-                      - clean
                       - test
                       - jacocoTestReport
                       - check
@@ -101,3 +99,24 @@ pipelines:
                 - build:
                     source: repos/*.jar
                     destination: war
+
+      - Deploy:
+          jobs:
+            deploying:
+              tasks:
+                - fetch:
+                     stage: Package
+                     job: fatJar
+                     source: fatJar/
+                - exec:
+                    command: ./gradle/webquickstart/gradlew
+                    arguments:
+                      - -b
+                      - deploy.gradle
+                      - deploy
+                      - -Ddev_server=10.28.135.233 
+                      - -Duser_server=ubuntu 
+                      - -Dkey_path=/home/go/omy.pem 
+                      - -Dtomcat_webapps=/opt/tomcat/webapps 
+                      - -Dwar_path=war 
+                      - -Dwar_name=webquickstart  
