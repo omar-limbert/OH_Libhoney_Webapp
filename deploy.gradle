@@ -14,10 +14,10 @@ task deploy {
   doLast {
     ssh.run {
       session(remotes.webServer) {
-        put from: 'deploy.sh', into: '/home/ubuntu/'            
+        put from: 'deploy.sh', into: '$HOME'            
         put from: "${jar_path}/${jar_name}.jar", into: "/tmp/${jar_name}.jar"
-        execute 'sudo chmod +x /home/ubuntu/deploy.sh ${jar_name}'
-        execute 'sudo sh /home/ubuntu/deploy.sh '  
+        execute 'sudo chmod +x $HOME/deploy.sh ${jar_name}'
+        execute 'sudo bash $HOME/deploy.sh ${jar_name}'  
       }
     }
   }
