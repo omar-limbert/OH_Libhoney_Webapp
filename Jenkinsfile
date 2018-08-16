@@ -79,7 +79,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh './gradlew -b deploy.gradle deploy -Pdev_server=10.28.135.233 -Puser_server=ubuntu -Pkey_path=/var/jenkins_home/omy.pem  -Pjar_path=build/libs -Pjar_name=libhoney-java-example-webapp-1.0.2-capsule'
+                sh './gradlew -b deploy.gradle deploy -Pdev_server=10.28.135.233 -Puser_server=ubuntu -Pkey_path=/var/jenkins_home/omy.pem  -Pjar_path=build/libs -Pjar_name=libhoney-java-example-webapp-1.0.2-capsule -Puser_home=/home/ubuntu'
             }
         }
         
