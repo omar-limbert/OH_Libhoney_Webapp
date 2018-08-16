@@ -112,7 +112,7 @@ pipelines:
                       - -b
                       - deploy.gradle
                       - deploy
-                      - -Pdev_server=10.28.135.233 
+                      - -Pdev_server=10.28.135.57 
                       - -Puser_server=ubuntu 
                       - -Pkey_path=/home/go/omy.pem 
                       - -Pjar_path=fatJar
