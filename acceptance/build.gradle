@@ -1,3 +1,7 @@
+plugins {
+    id 'io.qameta.allure' version '2.5'
+}
+
 apply plugin: 'java'
 
 repositories {
@@ -9,7 +13,6 @@ dependencies {
   testCompile 'io.cucumber:cucumber-junit:3.0.2'
   testCompile 'junit:junit:4.12'
 }
-
 task cucumber(dependsOn: testClasses) {
   doLast {
     javaexec {
@@ -18,4 +21,11 @@ task cucumber(dependsOn: testClasses) {
       args = ['--plugin', 'pretty', '--glue', 'gradle.cucumber', 'src/test/resources']
     }
   }
+}
+
+allure {
+    autoconfigure = false
+    version = '2.6.0'
+    resultsDir = file('/allure-results')
+    reportDir = file('/allure-results')
 }
