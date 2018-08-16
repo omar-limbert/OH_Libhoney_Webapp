@@ -16,7 +16,7 @@ task deploy {
       session(remotes.webServer) {
         put from: 'deploy.sh', into: '$HOME'            
         put from: "${jar_path}/${jar_name}.jar", into: "/tmp/${jar_name}.jar"
-        execute 'sudo chmod +x $HOME/deploy.sh ${jar_name}'
+        execute 'sudo chmod +x $HOME/deploy.sh'
         execute 'sudo bash $HOME/deploy.sh ${jar_name}'  
       }
     }
