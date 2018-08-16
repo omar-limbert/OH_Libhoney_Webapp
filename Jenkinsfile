@@ -52,7 +52,7 @@ pipeline {
         
         stage('Code Quality') {
             steps {
-                sh './gradlew sonarqube -Dsonar.organization=omar-limbert-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=f005f31e1cc80c26275d54f377b35595a4457f86'
+                sh './gradlew sonarqube -Dsonar.host.url=http://10.28.135.234:9000'
             }
         }
         stage('Package') {
@@ -76,6 +76,11 @@ pipeline {
                 }
             }
             
+        }
+        stage('Deploy') {
+            steps {
+                sh './gradlew -b deploy.gradle deploy -Pdev_server=10.28.135.233 -Puser_server=ubuntu -Pkey_path=/home/go/omy.pem  -Pjar_path=fatJar -Pjar_name=libhoney-java-example-webapp-1.0.2-capsule'
+            }
         }
         
     }

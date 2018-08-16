@@ -1,5 +1,7 @@
+JAR_NAME = $1
 echo 'Stopping Tomcat service...'		
 sudo service tomcat stop
-echo 'Sending jar file...'
-sudo cp -f /tmp/${jar_name}.jar $HOME/${jar_name}.jar
-sudo nohup java -jar $HOME/${jar_name}.jar &
+echo $JAR_NAME
+echo 'Sending jar file... '
+sudo cp -f /tmp/$JAR_NAME.jar $HOME/$JAR_NAME.jar
+sudo nohup java -jar $HOME/$JAR_NAME.jar &
