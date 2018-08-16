@@ -1,6 +1,7 @@
 .DS_store
 /.vagrant/
 /.idea/
+**/.allure/*/
 **/.gradle/*/
 **/reports/*/
 **/out/*/
