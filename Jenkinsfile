@@ -88,14 +88,13 @@ pipeline {
             }
             post {
                 success {
-                    publishHTML (target: [
-                        allowMissing: true,
-                        alwaysLinkToLastBuild: false,
-                        keepAll: true,
-                        reportDir: 'acceptance/build/allure-results/',
-                        reportFiles: 'index.html',
-                        reportName: "Allure Report"
-                         ])
+                    publishHTML([allowMissing: false, 
+                                 alwaysLinkToLastBuild: false, 
+                                 keepAll: false, 
+                                 reportDir: 'acceptance/build/allure-results/', 
+                                 reportFiles: 'index.html', 
+                                 reportName: 'HTML Report', 
+                                 reportTitles: 'Allure Report'])
                 }
             }
         }

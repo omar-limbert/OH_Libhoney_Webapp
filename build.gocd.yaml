@@ -132,7 +132,7 @@ pipelines:
                       - acceptance
               artifacts:
                 - build:
-                    source: build/reports/allure-results/*
+                    source: acceptance/build/reports/allure-results/
                     destination: allure_html
               tabs:
                 Allure_Report: allure_html/index.html
