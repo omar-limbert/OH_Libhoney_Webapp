@@ -132,13 +132,15 @@ pipelines:
                       - -p
                       - acceptance
               artifacts:
-                - allure:
-                    allure_report: acceptance/build/allure-results/index.html
+                - build:
+                    source: acceptance/build/allure-results/index.html
                     destination: allure_html
               artifacts:
-                - cucumber_report:
-                    source: acceptance/build/cucumber-results/cucumber-html-reports/report-feature_gradle-cucumber-features-gradle-feature.html
+                - build:
+                    source: acceptance/build/cucumber-results/*
                     destination: cucumber_html
               tabs:
                 Allure_Report: allure_html/index.html
                 Cucumber_Report: cucumber_html/report-feature_gradle-cucumber-features-gradle-feature.html
+                Cucumber_Report_steps: cucumber_html/overview-steps.html
+                Cucumber_Report_steps: cucumber_html/overview-features.html

@@ -92,7 +92,7 @@ pipeline {
                         allowMissing: true,
                         alwaysLinkToLastBuild: false,
                         keepAll: true,
-                        reportDir: 'acceptance/build/allure-results/',
+                        reportDir: 'acceptance/build/allure-results/index.html',
                         reportFiles: 'index.html',
                         reportName: "Allure Report"
                          ])
@@ -104,6 +104,24 @@ pipeline {
                         reportDir: 'acceptance/build/cucumber-results/cucumber-html-reports/',
                         reportFiles: 'report-feature_gradle-cucumber-features-gradle-feature.html',
                         reportName: "Cucumber Report"
+                         ])
+
+                    publishHTML (target: [
+                        allowMissing: true,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: 'acceptance/build/cucumber-results/cucumber-html-reports/',
+                        reportFiles: 'overview-steps.html',
+                        reportName: "Cucumber Report - Steps"
+                         ])
+
+                    publishHTML (target: [
+                        allowMissing: true,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: 'acceptance/build/cucumber-results/cucumber-html-reports/',
+                        reportFiles: 'overview-features.html',
+                        reportName: "Cucumber Report - Features"
                          ])
                 }
             }
