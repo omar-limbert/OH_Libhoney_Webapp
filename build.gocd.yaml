@@ -140,6 +140,6 @@ pipelines:
                     destination: cucumber_html
               tabs:
                 Allure_Report: allure_html/index.html
-                Cucumber_Report: cucumber_html/report-feature_gradle-cucumber-features-gradle-feature.html
-                Cucumber_Report_steps: cucumber_html/overview-steps.html
-                Cucumber_Report_features: cucumber_html/overview-features.html
+                Cucumber_Rep: cucumber_html/report-feature_gradle-cucumber-features-gradle-feature.html
+                Cucumber_steps: cucumber_html/overview-steps.html
+                Cucumber_ft: cucumber_html/overview-features.html
