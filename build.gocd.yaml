@@ -120,14 +120,13 @@ pipelines:
                       - -Puser_home=/home/ubuntu
       - Acceptance:
           jobs:
-            acceptance:
+            allure:
               tasks:
                 - exec:
                     command: ./acceptance/gradlew
                     arguments:
                       - clean
                       - test
-                      - cucumber
                       - allureReport
                       - -p
                       - acceptance
@@ -135,11 +134,22 @@ pipelines:
                 - build:
                     source: acceptance/build/allure-results/**/*
                     destination: allure_html
+              tabs:
+                Allure_Report: allure_html/index.html
+            cucumber:
+              tasks:
+                - exec:
+                    command: ./acceptance/gradlew
+                    arguments:
+                      - test
+                      - cucumber
+                      - -p
+                      - acceptance
+              artifacts:
                 - build:
                     source: acceptance/build/cucumber-results/**/*
                     destination: cucumber_html
               tabs:
-                Allure_Report: allure_html/index.html
                 Cucumber_Rep: cucumber_html/report-feature_gradle-cucumber-features-gradle-feature.html
                 Cucumber_steps: cucumber_html/overview-steps.html
                 Cucumber_ft: cucumber_html/overview-features.html
