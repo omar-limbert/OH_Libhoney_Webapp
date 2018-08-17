@@ -82,6 +82,23 @@ pipeline {
                 sh './gradlew -b deploy.gradle deploy -Pdev_server=10.28.135.58 -Puser_server=ubuntu -Pkey_path=/var/jenkins_home/omy.pem -Pjar_path=build/libs -Pjar_name=libhoney-java-example-webapp-1.0.2-capsule -Puser_home=/home/ubuntu'
             }
         }
+        stage('Acceptance') {
+            steps {
+                sh 'sudo ./acceptance/gradlew clean test allureReport -p acceptance/'
+            }
+            post {
+                success {
+                    publishHTML (target: [
+                        allowMissing: true,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: 'build/reports/allure-results/',
+                        reportFiles: 'index.html',
+                        reportName: "Allure Report"
+                         ])
+                }
+            }
+        }
         
     }
 }
