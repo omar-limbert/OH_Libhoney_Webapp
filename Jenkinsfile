@@ -96,6 +96,15 @@ pipeline {
                         reportFiles: 'index.html',
                         reportName: "Allure Report"
                          ])
+                         
+                    publishHTML (target: [
+                        allowMissing: true,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: 'acceptance/build/cucumber-results/cucumber-html-reports/',
+                        reportFiles: 'report-feature_gradle-cucumber-features-gradle-feature.html',
+                        reportName: "Cucumber Report"
+                         ])
                 }
             }
         }
