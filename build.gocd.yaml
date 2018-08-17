@@ -118,26 +118,6 @@ pipelines:
                       - -Pjar_path=fatJar
                       - -Pjar_name=libhoney-java-example-webapp-1.0.2-capsule
                       - -Puser_home=/home/ubuntu
-pipelines:
-  libhoney-acceptance-test:
-    lock_behavior: lockOnFailure
-    group: WebJavaAPP
-    materials:
-      repo:
-       git: https://github.com/devops-at06/OH_Libhoney_Webapp.git
-       branch: master
-    stages:
-      - Compile:
-          jobs:
-            assemble:
-              tasks:
-                - exec:
-                    command: ./acceptance/gradlew
-                    arguments:
-                      - clean
-                      - test
-                      - -p
-                      - acceptance
       - Acceptance:
           jobs:
             acceptance:
@@ -145,6 +125,8 @@ pipelines:
                 - exec:
                     command: ./acceptance/gradlew
                     arguments:
+                      - clean
+                      - test
                       - allureReport
                       - -p
                       - acceptance
