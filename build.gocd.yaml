@@ -133,10 +133,10 @@ pipelines:
                       - acceptance
               artifacts:
                 - build:
-                    source: acceptance/build/allure-results/index.html
+                    source: acceptance/build/allure-results/**/*
                     destination: allure_html
                 - build:
-                    source: acceptance/build/cucumber-results/*
+                    source: acceptance/build/cucumber-results/**/*
                     destination: cucumber_html
               tabs:
                 Allure_Report: allure_html/index.html
