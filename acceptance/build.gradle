@@ -38,7 +38,7 @@ allure {
 cucumberReports {
     outputDir = file("$buildDir/cucumber-results")
     buildName = '0'
-    reports = files("$buildDir/reports/cucumber/report.json", "$buildDir/test-results/testreports.json")
+    reports = files("$buildDir/reports/cucumber/report.js", "$buildDir/test-results/testreports.json")
 }
 
 test {
