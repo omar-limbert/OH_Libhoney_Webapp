@@ -82,14 +82,9 @@ pipeline {
                 sh './gradlew -b deploy.gradle deploy -Pdev_server=10.28.135.58 -Puser_server=ubuntu -Pkey_path=/var/jenkins_home/omy.pem -Pjar_path=build/libs -Pjar_name=libhoney-java-example-webapp-1.0.2-capsule -Puser_home=/home/ubuntu'
             }
         }
-        stage('Acceptance-build') {
+        stage('Acceptance') {
             steps {
-                sh './acceptance/gradlew clean cucumber -p acceptance/'
-            }
-        }
-        stage('Acceptance-test') {
-            steps {
-                sh './acceptance/gradlew test allureReport -p acceptance/'
+                sh './acceptance/gradlew clean test cucumber allureReport -p acceptance/'
             }
             post {
                 success {
