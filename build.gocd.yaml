@@ -127,6 +127,7 @@ pipelines:
                     arguments:
                       - clean
                       - test
+                      - cucumber
                       - allureReport
                       - -p
                       - acceptance
