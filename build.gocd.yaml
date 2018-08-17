@@ -135,7 +135,6 @@ pipelines:
                 - build:
                     source: acceptance/build/allure-results/index.html
                     destination: allure_html
-              artifacts:
                 - build:
                     source: acceptance/build/cucumber-results/*
                     destination: cucumber_html
