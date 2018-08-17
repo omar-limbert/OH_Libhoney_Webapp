@@ -84,7 +84,7 @@ pipeline {
         }
         stage('Acceptance') {
             steps {
-                sh 'sudo ./acceptance/gradlew clean test allureReport -p acceptance/'
+                sh './acceptance/gradlew clean test allureReport -p acceptance/'
             }
             post {
                 success {
