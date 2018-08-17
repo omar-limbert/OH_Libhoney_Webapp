@@ -8,6 +8,5 @@
 *.iml
 *.xml
 *.MF
-**/resources/*/
 **/build/*
 **/repos/*
