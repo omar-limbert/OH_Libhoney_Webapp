@@ -26,6 +26,6 @@ task cucumber(dependsOn: testClasses) {
 allure {
     autoconfigure = false
     version = '2.6.0'
-    resultsDir = file('/allure-results')
-    reportDir = file('/allure-results')
+    resultsDir = file("$buildDir/allure-results")
+    reportDir = file("$buildDir/allure-results")
 }
